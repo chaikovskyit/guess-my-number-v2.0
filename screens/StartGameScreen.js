@@ -1,11 +1,21 @@
 import { useState } from "react";
-import { StyleSheet, TextInput, View, Alert } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Alert,
+  Dimensions,
+  useWindowDimensions,
+} from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
-import Title from '../components/ui/Title';
-import Card from '../components/ui/Card'
-import InstructionText from '../components/ui/InstructionText'
+import Title from "../components/ui/Title";
+import Card from "../components/ui/Card";
+import InstructionText from "../components/ui/InstructionText";
 
 function StartGameScreen({ onPickNumber }) {
+
+  const {width, height} = useWindowDimensions()
+
   const [enteredNumber, setEnteredNumber] = useState("");
 
   const numberInputHandler = (enteredText) => {
@@ -31,8 +41,10 @@ function StartGameScreen({ onPickNumber }) {
     console.log("Valid Number!!!");
   };
 
+  const marginTopDistance = height < 450 ? 30 : 100
+
   return (
-    <View style={styles.screenContainer}>
+    <View style={[styles.screenContainer, {marginTop: marginTopDistance}]}>
       <Title>Guess My Number</Title>
       <Card style={styles.inputContainer}>
         <InstructionText>Write Number</InstructionText>
@@ -44,9 +56,9 @@ function StartGameScreen({ onPickNumber }) {
           autoCorrect={false}
           onChangeText={numberInputHandler}
           value={enteredNumber}
-          placeholder='?'
+          placeholder="?"
           // placeholder='.!..'
-          placeholderTextColor={'white'}
+          placeholderTextColor={"white"}
         />
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
@@ -63,11 +75,13 @@ function StartGameScreen({ onPickNumber }) {
 
 export default StartGameScreen;
 
+// const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    marginTop: 100,
-    alignItems: 'center'
+    // marginTop: deviceHeight < 450 ? 30 : 100,
+    alignItems: "center",
   },
   inputContainer: {
     justifyContent: "center",
