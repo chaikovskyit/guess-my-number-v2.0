@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
   gameScreen: {
     flex: 1,
     padding: 12,
+    alignItems: 'center'
   },
   instructionText: {
     marginBottom: 12,
